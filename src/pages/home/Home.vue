@@ -1,18 +1,19 @@
 <template>
     <div>
-      <div class="home">home</div>
-      <router-link to="/list">列表页</router-link>
+      <div class="home"><HomeHeader></HomeHeader></div>
+      <!--<router-link to="/list">列表页</router-link>-->
     </div>
 </template>
 
 <script>
+import HomeHeader from './components/Header'
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    HomeHeader
+  }
 }
 </script>
 
 <style scoped>
-  .home {
-    font-size: 50px;
-  }
 </style>
