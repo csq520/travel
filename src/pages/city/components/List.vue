@@ -5,7 +5,7 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
-            <div class="button">北京</div>
+            <div class="button">{{this.$store.state.city}}</div>
           </div>
         </div>
       </div>
@@ -16,6 +16,7 @@
             class="button-wrapper"
             v-for="item of hot"
             :key="item.id"
+            @click="handleCityClick(item.name)"
           >
             <div class="button">{{item.name}}</div>
           </div>
@@ -24,7 +25,7 @@
       <div class="area" v-for="(item,key) of cities" :key="key" :ref="key">
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list">
-          <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">
+          <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id" @click="handleCityClick(innerItem.name)">
             {{innerItem.name}}
           </div>
         </div>
@@ -42,6 +43,13 @@ export default {
     hot: Array,
     cities: Object,
     letter: String
+  },
+  methods: {
+    handleCityClick (city) {
+      this.$store.commit('changeCity', city)
+      // dispatch('changeCity', city)当要用到actions时用这个
+      this.$router.push('/')
+    }
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
@@ -62,13 +70,15 @@ export default {
 
   .border-topbottom
     &:before
-        border-color #ccc
+      border-color #ccc
+
     &:after
-        border-color: #ccc
+      border-color: #ccc
 
   .border-bottom
     &:before
       border-color #ccc
+
   .list
     overflow hidden
     position: absolute
@@ -76,6 +86,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
+
     .title
       line-height: .54rem;
       font-size .26rem
