@@ -55,6 +55,7 @@ export default {
       this.changeCity(city)
       // dispatch('changeCity', city)当要用到actions时用这个
       this.$router.push('/')
+      // 页面跳转，编程式导航
     },
     ...mapMutations(['changeCity'])
   },
